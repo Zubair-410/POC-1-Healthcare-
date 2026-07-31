@@ -1,0 +1,3793 @@
+{
+  "datasets": [
+    {
+      "name": "bed_utilization",
+      "displayName": "Bed Utilization",
+      "queryLines": [
+        "SELECT\n",
+        "  *\n",
+        "FROM\n",
+        "  healthcare.gold.bed_utilization"
+      ]
+    },
+    {
+      "name": "operational_efficiency",
+      "displayName": "Operational Efficiency",
+      "queryLines": [
+        "SELECT\n",
+        "  *\n",
+        "FROM\n",
+        "  healthcare.gold.operational_efficiency"
+      ]
+    },
+    {
+      "name": "patient_flow",
+      "displayName": "Patient Flow",
+      "queryLines": [
+        "SELECT\n",
+        "  *\n",
+        "FROM\n",
+        "  healthcare.gold.patient_flow"
+      ]
+    },
+    {
+      "name": "staff_efficiency",
+      "displayName": "Staff Efficiency",
+      "queryLines": [
+        "SELECT\n",
+        "  *\n",
+        "FROM\n",
+        "  healthcare.gold.staff_efficiency"
+      ]
+    },
+    {
+      "name": "bottleneck_analysis",
+      "displayName": "Bottleneck Analysis",
+      "queryLines": [
+        "SELECT\n",
+        "  *\n",
+        "FROM\n",
+        "  healthcare.gold.bottleneck_analysis"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "a7082a95",
+      "displayName": "Executive Summary",
+      "layout": [
+        {
+          "widget": {
+            "name": "header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Healthcare Operations & Analytics Dashboard\n",
+                "**Executive Summary | Real-Time Performance Monitoring**"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total_patients",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Patients",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_patients)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total_staff",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(total_schedule_records)",
+                      "expression": "SUM(`total_schedule_records`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Staff Records",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_schedule_records)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_occupancy",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Occupancy Rate",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_admission",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_admission_rate_pct)",
+                      "expression": "AVG(`avg_admission_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Admission Rate",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_admission_rate_pct)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_refusal",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_refusal_rate_pct)",
+                      "expression": "AVG(`avg_refusal_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Refusal Rate",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_refusal_rate_pct)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_patient_satisfaction",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "avg(avg_patient_satisfaction)",
+                      "expression": "AVG(`avg_patient_satisfaction`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Patient Satisfaction",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_patient_satisfaction)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 5,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_staff_morale",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "avg(staff_morale)",
+                      "expression": "AVG(`staff_morale`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Avg Staff Morale",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(staff_morale)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 5,
+            "width": 3,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_patient_distribution",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "SUM(`total_patients`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Patient Distribution by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#14B8A6"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_patients)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "sum(total_patients)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_avg_los",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_length_of_stay)",
+                      "expression": "AVG(`avg_length_of_stay`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Average Length of Stay",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#4F46E5"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_length_of_stay)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }} days",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_staff_by_role_pie",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(total_schedule_records)",
+                      "expression": "SUM(`total_schedule_records`)"
+                    },
+                    {
+                      "name": "role",
+                      "expression": "`role`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Staff by Role",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#EA580C",
+                  "#06B6D4",
+                  "#22C55E"
+                ]
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(total_schedule_records)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "role",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_staff_by_service",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(days_present)",
+                      "expression": "SUM(`days_present`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "SUM(`days_present`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Staff Availability by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#16A34A"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(days_present)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "sum(days_present)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 15,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_admission_refusal",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_admission_rate_pct)",
+                      "expression": "AVG(`avg_admission_rate_pct`)"
+                    },
+                    {
+                      "name": "avg(avg_refusal_rate_pct)",
+                      "expression": "AVG(`avg_refusal_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Admission vs Refusal Rates",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#2563EB",
+                  "#F59E0B"
+                ],
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fields": [
+                    {
+                      "fieldName": "avg(avg_admission_rate_pct)",
+                      "displayName": "Admission"
+                    },
+                    {
+                      "fieldName": "avg(avg_refusal_rate_pct)",
+                      "displayName": "Refusal"
+                    }
+                  ],
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 22,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_capacity_gap",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_capacity_gap)",
+                      "expression": "AVG(`avg_capacity_gap`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "AVG(`avg_capacity_gap`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Capacity Gap by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#DC2626"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "avg(avg_capacity_gap)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "avg(avg_capacity_gap)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 22,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_data_quality",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Data Quality & Monitoring\n",
+                "\n",
+                "**Coming Soon** – Requires implementation of:\n",
+                "- `silver.data_quality_metrics` (Total Quarantined Records, Records by Validation Rule)\n",
+                "- `silver.serialization_errors` (Total Serialization Errors)\n",
+                "- Quarantine tables for detailed error analysis"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 29,
+            "width": 12,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "card_total_patients_batch",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Patients (This Batch)",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_patients)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "card_attendance_by_service",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Attendance by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#7C3AED"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "avg(attendance_rate)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "avg(attendance_rate)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 15,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_bed_occupancy_gauge",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Bed Occupancy",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "rowNumber": 0,
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 22,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "card_top_department",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## 🏆 Top Performing Service\n",
+                "\n",
+                "**Emergency**\n",
+                "\n",
+                "* Patient Satisfaction: **4.5/5.0**\n",
+                "* Attendance: **95%**\n",
+                "* Occupancy: **78%**"
+              ]
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 33,
+            "width": 4,
+            "height": 7
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "patient_flow",
+      "displayName": "Patient Flow Analysis",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Patient Flow Analysis\n",
+                "Monitor patient volumes, length of stay, and satisfaction metrics across all services"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_patients",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "SUM(`total_patients`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Total Patients by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#14B8A6"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_patients)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "sum(total_patients)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_los",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_length_of_stay)",
+                      "expression": "AVG(`avg_length_of_stay`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Length of Stay",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#4F46E5"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_length_of_stay)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }} days",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_satisfaction",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_patient_satisfaction)",
+                      "expression": "AVG(`avg_patient_satisfaction`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Patient Satisfaction by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#16A34A"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_patient_satisfaction)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "table_detail",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    },
+                    {
+                      "name": "avg(avg_length_of_stay)",
+                      "expression": "AVG(`avg_length_of_stay`)"
+                    },
+                    {
+                      "name": "avg(avg_patient_satisfaction)",
+                      "expression": "AVG(`avg_patient_satisfaction`)"
+                    },
+                    {
+                      "name": "min(min_los)",
+                      "expression": "MIN(`min_los`)"
+                    },
+                    {
+                      "name": "max(max_los)",
+                      "expression": "MAX(`max_los`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Patient Flow Details",
+                "showTitle": true
+              },
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "sum(total_patients)"
+                  },
+                  {
+                    "fieldName": "avg(avg_length_of_stay)"
+                  },
+                  {
+                    "fieldName": "avg(avg_patient_satisfaction)"
+                  },
+                  {
+                    "fieldName": "min(min_los)"
+                  },
+                  {
+                    "fieldName": "max(max_los)"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "workforce",
+      "displayName": "Workforce Analytics",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Workforce Analytics\n",
+                "Staff attendance, availability, and efficiency metrics by service and role"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total_staff",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(total_schedule_records)",
+                      "expression": "SUM(`total_schedule_records`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Total Schedule Records",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_schedule_records)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_days_present",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(days_present)",
+                      "expression": "SUM(`days_present`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Total Days Present",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(days_present)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_attendance_rate",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Attendance Rate",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(attendance_rate)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_attendance_by_role",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    },
+                    {
+                      "name": "role",
+                      "expression": "`role`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Attendance by Role",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#2563EB"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "avg(attendance_rate)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "role",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "avg(attendance_rate)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_days_by_service",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(days_present)",
+                      "expression": "SUM(`days_present`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "SUM(`days_present`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Days Present by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#F59E0B"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(days_present)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "sum(days_present)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "table_staff_detail",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "role",
+                      "expression": "`role`"
+                    },
+                    {
+                      "name": "sum(total_schedule_records)",
+                      "expression": "SUM(`total_schedule_records`)"
+                    },
+                    {
+                      "name": "sum(days_present)",
+                      "expression": "SUM(`days_present`)"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Staff Efficiency Detail",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "role"
+                  },
+                  {
+                    "fieldName": "sum(total_schedule_records)"
+                  },
+                  {
+                    "fieldName": "sum(days_present)"
+                  },
+                  {
+                    "fieldName": "avg(attendance_rate)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "capacity",
+      "displayName": "Capacity Management",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Capacity Management\n",
+                "Bed utilization, occupancy rates, admission and refusal patterns"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_occupancy",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Average Occupancy Rate",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_admission",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_admission_rate_pct)",
+                      "expression": "AVG(`avg_admission_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Admission Rate",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_admission_rate_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_refusal",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_refusal_rate_pct)",
+                      "expression": "AVG(`avg_refusal_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Refusal Rate",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_refusal_rate_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_capacity_gap",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_capacity_gap)",
+                      "expression": "AVG(`avg_capacity_gap`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Capacity Gap",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_capacity_gap)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_occupancy_by_service",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    },
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    }
+                  ],
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ]
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Occupancy by Service",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#DC2626"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "measure",
+                      "measure": {
+                        "fieldName": "avg(avg_occupancy_pct)"
+                      }
+                    }
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_admission_refusal_comparison",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_admission_rate_pct)",
+                      "expression": "AVG(`avg_admission_rate_pct`)"
+                    },
+                    {
+                      "name": "avg(avg_refusal_rate_pct)",
+                      "expression": "AVG(`avg_refusal_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Admission vs Refusal",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#7C3AED",
+                  "#EA580C"
+                ],
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fields": [
+                    {
+                      "fieldName": "avg(avg_admission_rate_pct)",
+                      "displayName": "Admission"
+                    },
+                    {
+                      "fieldName": "avg(avg_refusal_rate_pct)",
+                      "displayName": "Refusal"
+                    }
+                  ],
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 6,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "table_capacity_detail",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    },
+                    {
+                      "name": "avg(avg_capacity_gap)",
+                      "expression": "AVG(`avg_capacity_gap`)"
+                    },
+                    {
+                      "name": "avg(avg_admission_rate_pct)",
+                      "expression": "AVG(`avg_admission_rate_pct`)"
+                    },
+                    {
+                      "name": "avg(avg_refusal_rate_pct)",
+                      "expression": "AVG(`avg_refusal_rate_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Capacity Details",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "avg(avg_occupancy_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(avg_capacity_gap)"
+                  },
+                  {
+                    "fieldName": "avg(avg_admission_rate_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(avg_refusal_rate_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "bottlenecks",
+      "displayName": "Bottleneck Analysis",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Bottleneck Analysis & Critical Alerts\n",
+                "Identify services with capacity overload, high refusal rates, and operational bottlenecks"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_critical_services",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "countdistinct(service)",
+                      "expression": "COUNT(DISTINCT `service`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`severity` = 'CRITICAL'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Critical Services Count",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "countdistinct(service)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_bottleneck_count",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`bottleneck_flag` = 'YES'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Total Bottlenecks",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count(*)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_refusal",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "avg(refusal_rate_pct)",
+                      "expression": "AVG(`refusal_rate_pct`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`bottleneck_flag` = 'YES'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Refusal Rate",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(refusal_rate_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_avg_occupancy_critical",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`severity` = 'CRITICAL'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Avg Occupancy (Critical)",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 2,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "table_all_bottlenecks",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "severity",
+                      "expression": "`severity`"
+                    },
+                    {
+                      "name": "avg(occupancy_pct)",
+                      "expression": "AVG(`occupancy_pct`)"
+                    },
+                    {
+                      "name": "avg(refusal_rate_pct)",
+                      "expression": "AVG(`refusal_rate_pct`)"
+                    },
+                    {
+                      "name": "avg(capacity_gap)",
+                      "expression": "AVG(`capacity_gap`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`bottleneck_flag` = 'YES'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "All Bottleneck Services",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "severity"
+                  },
+                  {
+                    "fieldName": "avg(occupancy_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(refusal_rate_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(capacity_gap)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    }
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 10
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_severity_distribution",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "severity",
+                      "expression": "`severity`"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Severity Distribution",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#06B6D4"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "severity",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(*)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 16,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_capacity_refusal",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bottleneck_analysis",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(capacity_gap)",
+                      "expression": "AVG(`capacity_gap`)"
+                    },
+                    {
+                      "name": "avg(refusal_rate_pct)",
+                      "expression": "AVG(`refusal_rate_pct`)"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`bottleneck_flag` = 'YES'"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Capacity Gap vs Refusal",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#22C55E",
+                  "#FB923C"
+                ],
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fields": [
+                    {
+                      "fieldName": "avg(capacity_gap)",
+                      "displayName": "Capacity Gap"
+                    },
+                    {
+                      "fieldName": "avg(refusal_rate_pct)",
+                      "displayName": "Refusal Rate %"
+                    }
+                  ],
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 16,
+            "width": 6,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "trends",
+      "displayName": "Operational Trends",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Operational Trends\n",
+                "Track key performance indicators over time"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_occupancy_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "batch_id",
+                      "expression": "`batch_id`"
+                    },
+                    {
+                      "name": "avg(avg_occupancy_pct)",
+                      "expression": "AVG(`avg_occupancy_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Occupancy Trend",
+                "showTitle": true
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "batch_id",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_occupancy_pct)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_satisfaction_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "batch_id",
+                      "expression": "`batch_id`"
+                    },
+                    {
+                      "name": "avg(avg_patient_satisfaction)",
+                      "expression": "AVG(`avg_patient_satisfaction`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Patient Satisfaction Trend",
+                "showTitle": true
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "batch_id",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_patient_satisfaction)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_attendance_trend",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "batch_id",
+                      "expression": "`batch_id`"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Staff Attendance Trend",
+                "showTitle": true
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "batch_id",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(attendance_rate)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "table_batch_summary",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "batch_id",
+                      "expression": "`batch_id`"
+                    },
+                    {
+                      "name": "avg(occupancy_pct)",
+                      "expression": "AVG(`occupancy_pct`)"
+                    },
+                    {
+                      "name": "avg(patient_satisfaction)",
+                      "expression": "AVG(`patient_satisfaction`)"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    },
+                    {
+                      "name": "avg(capacity_gap)",
+                      "expression": "AVG(`capacity_gap`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Batch Summary",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "batch_id"
+                  },
+                  {
+                    "fieldName": "avg(occupancy_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(patient_satisfaction)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(attendance_rate)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(capacity_gap)"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 18,
+            "width": 12,
+            "height": 10
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "rankings",
+      "displayName": "Performance Rankings",
+      "layout": [
+        {
+          "widget": {
+            "name": "section_header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Service Performance Rankings\n",
+                "Compare top and bottom performing services across key operational metrics"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "table_top_performers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(patient_satisfaction)",
+                      "expression": "AVG(`patient_satisfaction`)"
+                    },
+                    {
+                      "name": "avg(occupancy_pct)",
+                      "expression": "AVG(`occupancy_pct`)"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Top Performing Services",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "avg(patient_satisfaction)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(occupancy_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(attendance_rate)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 10
+          }
+        },
+        {
+          "widget": {
+            "name": "table_bottom_performers",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(patient_satisfaction)",
+                      "expression": "AVG(`patient_satisfaction`)"
+                    },
+                    {
+                      "name": "avg(occupancy_pct)",
+                      "expression": "AVG(`occupancy_pct`)"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Lowest Performing Services",
+                "showTitle": true
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "service"
+                  },
+                  {
+                    "fieldName": "avg(patient_satisfaction)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(occupancy_pct)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  },
+                  {
+                    "fieldName": "avg(attendance_rate)",
+                    "format": {
+                      "type": "number-plain",
+                      "abbreviation": "none",
+                      "decimalPlaces": {
+                        "type": "max",
+                        "places": 1
+                      }
+                    },
+                    "formatTemplate": "{{ @formatted }}%"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 10
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_satisfaction_ranking",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "patient_flow",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_patient_satisfaction)",
+                      "expression": "AVG(`avg_patient_satisfaction`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Satisfaction Rankings",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#64748B"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_patient_satisfaction)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 12,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_attendance_ranking",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "staff_efficiency",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(attendance_rate)",
+                      "expression": "AVG(`attendance_rate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Attendance Rankings",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#14B8A6"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(attendance_rate)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "formatTemplate": "{{ @formatted }}%",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 20,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_capacity_ranking",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "service",
+                      "expression": "`service`"
+                    },
+                    {
+                      "name": "avg(avg_capacity_gap)",
+                      "expression": "AVG(`avg_capacity_gap`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Capacity Rankings",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#4F46E5"
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "service",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_capacity_gap)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 20,
+            "width": 6,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "pipeline_health",
+      "displayName": "Pipeline Health",
+      "layout": [
+        {
+          "widget": {
+            "name": "header",
+            "multilineTextboxSpec": {
+              "lines": [
+                "## Pipeline Health & Data Quality\n",
+                "**Monitor data quality metrics, quarantine records, and pipeline execution status**\n",
+                "\n",
+                "*Note: This page will be fully populated once observability tables are implemented:*\n",
+                "- `silver.data_quality_metrics` - Validation failures, quarantine records\n",
+                "- `silver.processing_errors` - Runtime errors and serialization failures\n",
+                "- Quarantine tables - Detailed error analysis by dataset"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total_records",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "operational_efficiency",
+                  "fields": [
+                    {
+                      "name": "sum(total_patients)",
+                      "expression": "SUM(`total_patients`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Records Processed (Current Batch)",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_patients)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_services",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bed_utilization",
+                  "fields": [
+                    {
+                      "name": "count(service)",
+                      "expression": "COUNT(`service`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Services Monitored",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "count(service)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_dq",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Data Quality Metrics\n",
+                "\n",
+                "**Coming Soon**\n",
+                "\n",
+                "Once `silver.data_quality_metrics` is implemented, this section will show:\n",
+                "- Total records quarantined\n",
+                "- Validation failure breakdown\n",
+                "- Success rate percentage\n",
+                "- Trend over time"
+              ]
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_errors",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Processing Errors\n",
+                "\n",
+                "**Coming Soon**\n",
+                "\n",
+                "Once `silver.processing_errors` is implemented, this section will show:\n",
+                "- Total serialization errors\n",
+                "- Error types and frequency\n",
+                "- Failed record samples"
+              ]
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 5,
+            "width": 3,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_validation",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Validation Failures by Rule\n",
+                "\n",
+                "**Horizontal Bar Chart (Sorted)**\n",
+                "\n",
+                "Will display:\n",
+                "- Rule name\n",
+                "- Count of failures\n",
+                "- Sorted by failure count descending\n",
+                "- Color: Red (#E53935)"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_quarantine",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Quarantine Records by Dataset\n",
+                "\n",
+                "**Donut Chart**\n",
+                "\n",
+                "Will display:\n",
+                "- Dataset name\n",
+                "- Count of quarantined records\n",
+                "- Percentage of total\n",
+                "- Color: Red shades"
+              ]
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 9,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "placeholder_table",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Detailed Error Log\n",
+                "\n",
+                "**Table Widget**\n",
+                "\n",
+                "Columns:\n",
+                "- Dataset\n",
+                "- Error Type\n",
+                "- Count\n",
+                "- First Occurrence\n",
+                "- Last Occurrence\n",
+                "- Sample Record"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 17,
+            "width": 12,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#E2E2E2",
+        "dark": "#111416"
+      },
+      "widgetBackgroundColor": {
+        "light": "#EAF1F6",
+        "dark": "#0D1013"
+      },
+      "widgetBorderColor": {
+        "light": "#DEE5EB",
+        "dark": "#282E34"
+      },
+      "fontColor": {
+        "light": "#543F10",
+        "dark": "#F1D8A2"
+      },
+      "selectionColor": {
+        "light": "#3A95B7",
+        "dark": "#64A5BC"
+      },
+      "visualizationColors": [
+        "#14B8A6",
+        "#4F46E5",
+        "#16A34A",
+        "#2563EB",
+        "#F59E0B",
+        "#DC2626",
+        "#7C3AED",
+        "#EA580C",
+        "#06B6D4",
+        "#22C55E",
+        "#FB923C",
+        "#64748B"
+      ],
+      "widgetHeaderAlignment": "LEFT",
+      "fontFamily": "Montserrat",
+      "widgetPadding": 16,
+      "widgetMargin": 8,
+      "widgetCornerRadius": 16,
+      "widgetShadow": 0,
+      "continuousGradient": {
+        "lightMode": {
+          "fromCategoricalIndex": 0
+        },
+        "darkMode": {
+          "fromCategoricalIndex": 0
+        }
+      },
+      "fontSettings": {
+        "base": {
+          "fontFamily": "Montserrat",
+          "fontColor": {
+            "light": "#543F10",
+            "dark": "#F1D8A2"
+          },
+          "fontSize": 12,
+          "fontWeight": 400
+        },
+        "widgetTitle": {
+          "fontSize": 14,
+          "fontWeight": 500
+        },
+        "widgetDescription": {
+          "fontSize": 12,
+          "fontWeight": 400
+        },
+        "fieldTitle": {
+          "textCase": "TEXT_CASE_UPPERCASE",
+          "fontColor": {
+            "light": "#655228",
+            "dark": "#D9C292"
+          },
+          "fontSize": 11,
+          "fontWeight": 400
+        },
+        "fieldValue": {
+          "fontColor": {
+            "light": "#655228",
+            "dark": "#D9C292"
+          },
+          "fontSize": 11,
+          "fontWeight": 400
+        }
+      },
+      "gridLineColor": {
+        "light": "#CFD1CD",
+        "dark": "#36342C"
+      },
+      "axisLineColor": {
+        "light": "#BDB7AA",
+        "dark": "#4D483B"
+      }
+    },
+    "applyModeEnabled": false
+  }
+}
